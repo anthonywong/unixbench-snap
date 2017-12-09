@@ -29,7 +29,7 @@ description: |
   operating system, libraries, and even compiler.
 
 grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: devmode # use 'strict' once you have the right plugs and slots
+confinement: strict
 
 apps:
     unixbench:
@@ -41,6 +41,8 @@ parts:
     plugin: dump
     stage-packages:
         - perl
+        - coreutils
+        - libc-bin
     build-packages:
         - make
         - gcc
@@ -48,6 +50,7 @@ parts:
     prepare: |
         sed -i 's/^OPTON += -march=native -mtune=native//' UnixBench/Makefile
         sed -i 's/preChecks();//' UnixBench/Run
+        sed -i 's/system("sync; sleep 1; sync; sleep 2");//' UnixBench/Run
     build: |
         cd UnixBench
         make

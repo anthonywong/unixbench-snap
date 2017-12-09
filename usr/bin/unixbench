@@ -1,8 +1,10 @@
 #!/bin/sh
 export UB_TMPDIR=${SNAP_USER_DATA}/tmp
 export UB_RESULTDIR=${SNAP_USER_DATA}/results
+export UB_TESTDIR=${SNAP_USER_DATA}/testdir
 export PERL5LIB="${PERL5LIB}:${SNAP}/usr/local/lib/x86_64-linux-gnu/perl/5.22.1:${SNAP}/usr/local/share/perl/5.22.1:${SNAP}/usr/lib/x86_64-linux-gnu/perl5/5.22:${SNAP}/usr/share/perl5:${SNAP}/usr/lib/x86_64-linux-gnu/perl/5.22:${SNAP}/usr/share/perl/5.22:${SNAP}/usr/local/lib/site_perl:${SNAP}/usr/lib/x86_64-linux-gnu/perl-base"
 
-mkdir $UB_TMPDIR $UB_RESULTDIR
+mkdir $UB_TMPDIR $UB_RESULTDIR $UB_TESTDIR
+cd $UB_TESTDIR; for f in ${SNAP}/testdir/*; do ln -s $f `basename $f`; done
 cd $SNAP
 exec ./Run "$@"
