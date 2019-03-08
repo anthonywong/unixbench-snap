@@ -1,5 +1,5 @@
 name: unixbench
-version: '5.1.3+20170630'
+version: '5.1.3+20180129'
 summary: the revised BYTE UNIX benchmark suite
 description: |
   UnixBench is the original BYTE UNIX benchmark suite, updated and revised by
